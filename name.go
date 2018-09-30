@@ -100,12 +100,13 @@ func genBang() {
 				world.person.Range(
 					func(key, value interface{}) bool {
 						p := value.(*p)
-						if p.bp.id == 0 && p.lv >= 6 {
+						if p.bp.id != 0 && p.lv >= 6 {
 							b := new(bang)
 							b.bz = p.id
 							b.id = bangID
 							bangID++
 							b.name = fmt.Sprintf("%s%v%s", p.name, p.id, "帮")
+							b.pp = new(sync.Map)
 							b.pp.Store(p.id, p)
 							world.bp.Store(b.id, b)
 							logrus.WithFields(logrus.Fields{
